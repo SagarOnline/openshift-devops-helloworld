@@ -6,7 +6,7 @@ spec:
   runPolicy: "Serial"
   source:
     type: "Git"
-    git:
+    binary:
       uri: "https://github.com/SagarOnline/openshift.git"
       ref: "master"
     contextDir: "helloworld"
