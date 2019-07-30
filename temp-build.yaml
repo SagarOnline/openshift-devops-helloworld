@@ -4,6 +4,10 @@ metadata:
   name: "helloworld-build"
 spec:
   runPolicy: "Serial"
+  source:
+    type: "binary"
+    binary: "/target/helloworld.jar"
+      asFile: true
   strategy:
     type: "Docker"
     dockerStrategy:
