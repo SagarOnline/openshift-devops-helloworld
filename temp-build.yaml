@@ -6,8 +6,8 @@ spec:
   runPolicy: "Serial"
   source:
     type: "binary"
-    binary: "/target/helloworld.jar"
-      asFile: true
+    binary:
+      asFile: "/target/helloworld.jar"
   strategy:
     type: "Docker"
     dockerStrategy:
