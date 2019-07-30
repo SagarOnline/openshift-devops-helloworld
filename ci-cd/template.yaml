@@ -1,0 +1,81 @@
+---
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: helloworld-app
+  name: helloworld-dc
+spec:
+  replicas: 2
+  selector:
+    app: helloworld-app
+  template:
+    metadata:
+      labels:
+        app: helloworld-app
+    spec:
+      containers:
+        - image: sagaronline/helloworld:v1
+          imagePullPolicy: IfNotPresent
+          resources: {}
+          name: helloworld-c
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - helloworld-c
+        from:
+          kind: ImageStreamTag
+          name: 'helloworld:v1'
+      type: ImageChange
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: '2019-07-22T04:33:00Z'
+  labels:
+    app: helloworld-app
+  name: helloworld-svc
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: helloworld-app
+  sessionAffinity: None
+  type: ClusterIP
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: helloworld-app
+  name: helloworld-route
+spec:
+  to:
+    kind: Service
+    name: helloworld-svc
+    weight: 100
+  wildcardPolicy: None
+
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: helloworld
+  labels:
+    app: helloworld-app
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - name: v1
+      from:
+        kind: DockerImage
+        name: sagaronline/helloworld:v1
