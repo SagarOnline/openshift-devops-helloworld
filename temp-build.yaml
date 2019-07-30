@@ -7,7 +7,7 @@ spec:
   source:
     type: "binary"
     binary:
-      asFile: "/target/helloworld.jar"
+      asFile: "helloworld.jar"
   strategy:
     type: "Docker"
     dockerStrategy:
