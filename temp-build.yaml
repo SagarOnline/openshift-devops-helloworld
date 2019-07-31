@@ -5,7 +5,8 @@ metadata:
 spec:
   runPolicy: "Serial"
   source:
-    type: "binary"
+    type: "Binary"
+    contextDir: "target"
     binary:
       asFile: "helloworld.jar"
   strategy:
