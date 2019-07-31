@@ -16,7 +16,7 @@ spec:
   output:
     to:
       kind: "ImageStreamTag"
-      name: "helloworld:v1"
+      name: "helloworld-is:v1"
 
 ---
 apiVersion: image.openshift.io/v1
