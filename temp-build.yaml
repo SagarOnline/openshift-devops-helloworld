@@ -17,3 +17,11 @@ spec:
     to:
       kind: "ImageStreamTag"
       name: "helloworld:v1"
+
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: helloworld-is
+  labels:
+    app: helloworld-app
