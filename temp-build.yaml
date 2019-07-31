@@ -6,6 +6,7 @@ spec:
   runPolicy: "Serial"
   source:
     type: "Binary"
+    contextDir: "context"
   strategy:
     type: "Docker"
     dockerStrategy:
